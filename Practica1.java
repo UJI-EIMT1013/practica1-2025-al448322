@@ -34,15 +34,26 @@ public class Practica1 {
     //EJERCICIO2
     public static void separate(Set<Integer> cuadrados, Set<Integer> noCuadrados) {
         Set<Integer> union = new HashSet<>(cuadrados);
+        Set<Integer> nuevoCuadrados = new HashSet<>();
+        Iterator<Integer> it = union.iterator();
         union.addAll(noCuadrados);  //Uno ambos Set en 1 solo para poder iterarlo luego
 
-        Set<Integer> nCuadrados = new HashSet<>();
-        for (Integer n : union) {
-            nCuadrados.add(n * n);  //Guardo n^n en el nuevo set
+        while (it.hasNext()) {
+            int elemento = it.next();
+            if (cuadrados.contains(elemento * elemento)) {
+                nuevoCuadrados.add(elemento * elemento);
+            }
+            if (noCuadrados.contains(elemento * elemento)) {
+                nuevoCuadrados.add(elemento * elemento);
+            }
         }
 
-        cuadrados.retainAll(nCuadrados);    //
-        noCuadrados.removeAll(nCuadrados);
+        cuadrados.clear();
+        cuadrados.addAll(nuevoCuadrados);
+
+        union.removeAll(nuevoCuadrados);
+        noCuadrados.clear();
+        noCuadrados.addAll(union);
 
     }
 
