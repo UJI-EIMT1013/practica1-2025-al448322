@@ -100,8 +100,29 @@ public class Practica1 {
 
     //EJERCICIO 4
     public static <T> Collection<Set<T>> coverageSet2(Set<T> u, ArrayList<Set<T>> col) {
-        //TODO
-        return null;
+        Collection<Set<T>> res = new HashSet<>();
+        for (int i = 0; i < col.size(); i++) {
+            Set<T> conjunto1 = col.get(i);
+
+            if (!u.equals(conjunto1)) {     //Si el contenido de u NO es igual al del conjunto1 de col
+                for (int j = i + 1; j < col.size(); j++) {      //Inicio con el siguiente
+                    Set<T> conjunto2 = col.get(j);
+
+                    if (!u.equals(conjunto2)) {     //Si el contenido de u NO es igual al del conjunto2 de col
+                        Set<T> union = new HashSet<>(conjunto1);
+                        union.addAll(conjunto2);    //Uno ambos conjuntos
+
+                        if (union.equals(u)) {  //Si union es igual a u, añado a res el conjunto1 y conjunto2
+                            res.add(conjunto1);
+                            res.add(conjunto2);
+                            return res;
+                        }
+                    }
+                }
+            }
+        }
+
+        return res;
     }
 
 
