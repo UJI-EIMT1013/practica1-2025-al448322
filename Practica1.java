@@ -74,8 +74,28 @@ public class Practica1 {
 
     //EJERCICIO 3
     public static <T> Collection<Set<T>> divideInSets(Iterator<T> it) {
-        //TODO
-        return null;
+        Collection<Set<T>> res = new ArrayList<>();
+        while (it.hasNext()) {
+            T elemento = it.next();
+            boolean colocado = false;
+
+            for (Set<T> conjunto : res) {
+                if (!conjunto.contains(elemento)) { //Si el conjunto iterado de res No contiene el elemento del Iterador (es decir de la Collection que pasa por argumento), lo añado ha dicho conjunto
+                    conjunto.add(elemento);
+                    colocado = true;
+                    break;  //Aqui ya he añadido x elemento al conjunto
+                }
+            }
+
+            if (!colocado) {    //Si el elemento no se ha podido añadir (porque esta repetido por ejemplo), se crea un nuevo HashSet donde se añade dicho elemento, y se añade dicho HashSet a res
+                Set<T> aux = new HashSet<>();
+                aux.add(elemento);
+                res.add(aux);
+            }
+
+        }
+
+        return res;
     }
 
     //EJERCICIO 4
